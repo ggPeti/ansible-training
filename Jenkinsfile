@@ -38,3 +38,16 @@ node {
             )
     }
 }
+
+stage "Deploy to production"
+
+node {
+    wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
+        ansiblePlaybook(
+            playbook: 'webserver.yml',
+            inventory: 'inventory.ini',
+            credentialsId: 'vagrant',
+            colorized: true
+            )
+    }
+}
