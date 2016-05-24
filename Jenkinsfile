@@ -9,3 +9,18 @@ node {
         inventory: 'inventory.ini', 
         credentialsId: 'vagrant')
 }
+
+stage "Check syntax"
+
+node {
+
+    wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
+        ansiblePlaybook(
+            playbook: 'webserver.yml',
+            inventory: 'inventory.ini',
+            credentialsId: 'vagrant',
+            extras: '--syntax-check',
+            colorized: true
+            )
+    }
+}
