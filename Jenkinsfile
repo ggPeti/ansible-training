@@ -24,3 +24,17 @@ node {
             )
     }
 }
+
+stage "Check dry-run"
+
+node {
+    wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
+        ansiblePlaybook(
+            playbook: 'webserver.yml',
+            inventory: 'inventory.ini',
+            credentialsId: 'vagrant',
+            extras: '--check --diff',
+            colorized: true
+            )
+    }
+}
